@@ -15,6 +15,9 @@ class Estudiante(models.Model):
     nombreCarrera = models.CharField(max_length=80)
     booleanoReciboPago = models.BooleanField()
 
+    def __str__(self):
+        return f"{self.nombreCompleto} {self.cedula}"
+
     
 
 

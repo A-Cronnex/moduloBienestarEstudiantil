@@ -8,3 +8,6 @@ class Proyecto(models.Model):
     fechaCreacion = models.DateField()
     fechaFin = models.DateField()
     estudiantes = models.ManyToManyField(Estudiante)
+
+    def __str__(self) -> str:
+        return f"Nombre del Proyecto: {self.nombreProyecto} Id del proyecto {self.idProyecto} Fecha de Creación del Proyecto: {self.fechaCreacion}"
