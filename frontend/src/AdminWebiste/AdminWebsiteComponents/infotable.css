@@ -1,0 +1,85 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@300..700&display=swap');
+
+.infoTable{
+    border-collapse: collapse;
+    margin: 25px 0;
+    font-size: 0.9em;
+    min-width: 400px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
+}
+
+.infoTable thead tr {
+    background-color: #009879;
+    color: #ffffff;
+    text-align: left;
+    font-family: 'Quicksand',sans-serif;
+}
+
+.infoTable th,
+.infoTable td {
+    padding: 12px 15px;
+}
+
+.infoTable tbody tr {
+    border-bottom: 1px solid #dddddd;
+}
+
+.infoTable tbody tr:nth-of-type(even) {
+    background-color: #f3f3f3;
+}
+
+.infoTable tbody tr:last-of-type {
+    border-bottom: 2px solid #009879;
+}
+
+.wrapperSearch{
+    width: 100%;
+    padding-top: 10rem;
+    .infoTable{
+        margin: auto;
+    }
+}
+
+
+.wrapperSearch{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    justify-content: center;
+}
+
+input[type="search"]{
+    margin: 1.5rem;
+    width: 20%;
+    height: 2.5rem;
+}
+
+button{
+    height: 2rem;
+    margin: 0.5em;    
+    border-radius: 8px;
+    color: white;
+    border: none;
+}
+
+.editar{
+    background-color: lightseagreen;
+    transition: 0.5s;
+    
+}
+
+.eliminar{
+    background-color: lightcoral;
+    transition: 0.5s;
+}
+
+.editar:hover{
+    background-color: rgb(24, 124, 119);
+    transition: 0.5s;
+    
+}
+
+.eliminar:hover{
+    background-color: rgb(136, 76, 76);
+    transition: 0.5s;
+}

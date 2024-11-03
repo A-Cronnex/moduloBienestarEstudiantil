@@ -1,0 +1,29 @@
+header .header ul{
+    display: flex;
+    list-style: none;
+    font-size: larger;
+    
+    color: white;
+}
+
+header .header {
+    display: flex;
+    justify-content: center;
+    background-color: #333333;
+    border-bottom: 1px solid lightgray;
+    align-items: center;
+}
+
+header .header ul li:hover{
+    cursor: pointer;
+    color: lightgray;
+}
+
+.excel{
+    width: 20%;
+    height: 3rem;
+    text-align:center;
+    background-color: green;
+    
+}
+
