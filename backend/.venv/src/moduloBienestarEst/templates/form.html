@@ -6,9 +6,104 @@
             Formulario de Inscripción
         </title>
         <link rel="icon" href="{% static 'moduloBienestarEst/utp_logo.ico' %}" type="image/x-icon">
+        <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css">
+        <link href="{% static 'moduloBienestarEst/css/nav.css' %}" rel="stylesheet" type="text/css">
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link href="{% static 'moduloBienestarEst/css/footer.css'%}" rel="stylesheet" type="text/css">
+        <link href="{% static 'moduloBienestarEst/css/StudentForm.css'%}" rel="stylesheet" type="text/css">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+        <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     </head>
     <body>
-        <h1>Prueba</h1>
-        <img src="{% static 'moduloBienestarEst/utp_logo.ico' %}">
+        <div class="wrapper">
+            <!-- NAV -->
+            <nav id="navWebpage" class="navWeb">
+                <img src="{% static 'moduloBienestarEst/utp_logo.jpeg'%}" alt="something"/>
+                <ul>
+                    <li><a href="https://utp.ac.pa/">Página Principal</a></li>
+                    <li><a href="https://vidauniversitaria.utp.ac.pa/Default.aspx">Dirección de Vida Universitaria</a></li>
+                    <li><i class="fa-brands fa-instagram"></i></li>
+                </ul>
+            </nav>
+
+              <div class='form-container'>
+              <h1 class='title'>Ingrese Información Servicio Social</h1>
+                  <form action="" class='form-info'>
+                    
+                    <label for="nombre">Nombre completo: </label>
+                    <input type="text" name='nombre' id='nombre' class='inputForForms' />
+                    
+      
+                    
+                    <label for="edad">Edad: </label>
+                    <input type="number" name='edad' id='edad' class='inputForForms'/>
+                    
+      
+                      
+                      <label for="cedula">Cedula: </label>
+                      <input type="text" name='cedula' id='cedula' class='inputForForms'/>
+                    
+      
+                      
+                      <label for="Telefono1">Telefono 1: </label>
+                      <input type="text" name='Telefono1' id='Telefono1' class='inputForForms'/>
+                      
+      
+      
+                      
+                      <label for="Telefono2">Telefono 2: </label>
+                      <input type="text" name='Telefono2' id='Telefono2' class='inputForForms'/>
+                      
+      
+                      
+                      <label for="cedula">Correo institucional: </label>
+                      <input type="text" name='cedula' id='cedula' class='inputForForms'/>
+                      
+      
+                    
+                     <label for="edad">Año actual que cursa: </label>
+                     <input type="number" name='edad' id='edad' class='inputForForms'/>
+      
+                     <label for='proyectos'>Proyecto que va a participar: </label>
+                     <select name="proyectos" id="proyectos">
+                          <option></option>
+                     </select>
+                    
+                     <label for="facultades">Facultad: </label>
+                     <select name="facultades" id="facultades" value="facultad">
+                      </select>
+                      
+      
+      
+            
+              <label for="tipoSangre">Tipo de Sangre: </label>
+              <select name='tipoSangre' id='tipoSangre'>
+
+                  <option value="A" id=A>A</option>
+
+              </select>
+             
+      
+              <label for="carreras">Carreras: </label>
+              <select name="carreras" id="carreras">
+              </select>
+              
+            <div>
+                <p>¿Incluye su copia de recibo de pago?</p>
+                <input type="checkbox" class="inputForForms">
+            </div>
+    
+                <button type='submit'>ENVIAR</button>
+                    </form>
+                </div>
+                <footer>
+                    <img src="{% static 'moduloBienestarEst/utp_logo_sin_fondo.png'%}" alt="utpSinfondo" />
+                </footer>
+            </div>
+
+            <script  type="module" src="{% static 'moduloBienestarEst/js/constantes.js' %}"></script>
+            <script type="module" src="{% static 'moduloBienestarEst/js/form_logic.js' %}" ></script>
     </body>
 </html>
