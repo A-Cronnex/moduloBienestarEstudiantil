@@ -17,6 +17,10 @@ class Estudiante(models.Model):
 
     def __str__(self):
         return f"{self.nombreCompleto} {self.cedula}"
+    
+    @staticmethod
+    def returnAttributes():
+        return "nombreCompleto edad cedula telefonoUno telefonoDos correoInstitucional yearCursado proyectoQueParticipa nombreFacultad tipoSangre nombreCarrera booleanoReciboPago"
 
     
 

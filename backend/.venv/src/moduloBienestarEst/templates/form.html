@@ -13,7 +13,7 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link href="{% static 'moduloBienestarEst/css/footer.css'%}" rel="stylesheet" type="text/css">
         <link href="{% static 'moduloBienestarEst/css/StudentForm.css'%}" rel="stylesheet" type="text/css">
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>  
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> 
         <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Quicksand:wght@300..700&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
     </head>
     <body>
@@ -27,13 +27,13 @@
                     <li><i class="fa-brands fa-instagram"></i></li>
                 </ul>
             </nav>
-
               <div class='form-container'>
               <h1 class='title'>Ingrese Información Servicio Social</h1>
-                  <form action="" class='form-info'>
+                  <form action="" class='form-info' method="POST">
+                    {% csrf_token %}
                     
                     <label for="nombre">Nombre completo: </label>
-                    <input type="text" name='nombre' id='nombre' class='inputForForms' />
+                    <input type="text" name='nombreCompleto' id='nombre' class='inputForForms' />
                     
       
                     
@@ -48,31 +48,33 @@
       
                       
                       <label for="Telefono1">Telefono 1: </label>
-                      <input type="text" name='Telefono1' id='Telefono1' class='inputForForms'/>
+                      <input type="text" name='telefonoUno' id='Telefono1' class='inputForForms'/>
                       
       
       
                       
                       <label for="Telefono2">Telefono 2: </label>
-                      <input type="text" name='Telefono2' id='Telefono2' class='inputForForms'/>
+                      <input type="text" name='telefonoDos' id='Telefono2' class='inputForForms'/>
                       
       
                       
-                      <label for="cedula">Correo institucional: </label>
-                      <input type="text" name='cedula' id='cedula' class='inputForForms'/>
+                      <label for="correoInstitucional">Correo institucional: </label>
+                      <input type="email" name='correoInstitucional' id='correoInstitucional' class='inputForForms'/>
                       
       
                     
-                     <label for="edad">Año actual que cursa: </label>
-                     <input type="number" name='edad' id='edad' class='inputForForms'/>
+                     <label for="yearCursado">Año actual que cursa: </label>
+                     <input type="number" name='yearCursado' id='yearCursado' class='inputForForms'/>
       
-                     <label for='proyectos'>Proyecto que va a participar: </label>
-                     <select name="proyectos" id="proyectos">
-                          <option></option>
+                     <label for='proyectoQueParticipa'>Proyecto que va a participar: </label>
+                     <select name="proyectoQueParticipa" id="proyectos">
+                        {% for proyecto in nombreProyecto %}
+                              <option value="{{proyecto}}">{{proyecto}}</option>
+                        {%endfor%}
                      </select>
                     
-                     <label for="facultades">Facultad: </label>
-                     <select name="facultades" id="facultades" value="facultad">
+                     <label for="nombreFacultad">Facultad: </label>
+                     <select name="nombreFacultad" id="facultades">
                       </select>
                       
       
@@ -80,19 +82,16 @@
             
               <label for="tipoSangre">Tipo de Sangre: </label>
               <select name='tipoSangre' id='tipoSangre'>
-
-                  <option value="A" id=A>A</option>
-
               </select>
              
       
-              <label for="carreras">Carreras: </label>
-              <select name="carreras" id="carreras">
+              <label for="nombreCarrera">Carreras: </label>
+              <select name="nombreCarrera" id="carreras">
               </select>
               
             <div>
                 <p>¿Incluye su copia de recibo de pago?</p>
-                <input type="checkbox" class="inputForForms">
+                <input type="checkbox" name="booleanoReciboPago" class="inputForForms" value="true">
             </div>
     
                 <button type='submit'>ENVIAR</button>
@@ -102,8 +101,7 @@
                     <img src="{% static 'moduloBienestarEst/utp_logo_sin_fondo.png'%}" alt="utpSinfondo" />
                 </footer>
             </div>
-
             <script  type="module" src="{% static 'moduloBienestarEst/js/constantes.js' %}"></script>
-            <script type="module" src="{% static 'moduloBienestarEst/js/form_logic.js' %}" ></script>
+            <script type="module" src="{% static 'moduloBienestarEst/js/form_logic.js' %}?v={{ timestamp }}" ></script> 
     </body>
 </html>

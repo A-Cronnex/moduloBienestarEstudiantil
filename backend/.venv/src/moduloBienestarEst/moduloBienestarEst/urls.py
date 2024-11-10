@@ -17,8 +17,9 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from estudiante.views import formViewStudent
+from proyectoBienestar.views import proyectos_view
 
 urlpatterns = [
-    path('form/',formViewStudent, name='form'),
+    path('',formViewStudent, name = "form"),
     path('admin/', admin.site.urls)
 ]

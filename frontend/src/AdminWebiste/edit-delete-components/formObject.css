@@ -1,0 +1,37 @@
+
+.form-container{
+    margin: 4rem;
+}
+
+.form-info{
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    margin: 4rem;
+    gap: 1rem;
+}
+
+button[type="submit"]{
+    background-color:  violet;
+}
+
+button[type="submit"]:hover{
+    background-color:  rgb(185, 63, 185);
+}
+
+.form-info div {
+    display: flex;
+    justify-content: space-between;
+}
+
+.back{
+    background-color: green;
+}
+
+.back:hover{
+    background-color: rgb(1, 48, 1);
+}
+
+.form-info input{
+    height: 2rem;
+}
