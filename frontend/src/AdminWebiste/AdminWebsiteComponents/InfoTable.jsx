@@ -5,28 +5,29 @@ import React, { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-function Button({type,texto, clase}){
+function Button({type,texto, clase, id}){
     let [seleccionado, setSeleccionado] = useState(false)
     const navigation = useNavigate()
+    let [idEP, setIdEP] = useState(id)
 
     const onClickNavigation = () => {
         if (clase == "estudiante"){
             if(type == "eliminar" ){
-                navigation("/borrarEstudiante")
+                navigation(`/borrarEstudiante/${id}`)
             }
 
             if(type == "editar"){
-                navigation("/editarEstudiante")
+                navigation(`/editarEstudiante/${id}`)
             }
         }
 
         if(clase == "proyecto"){
             if(type == "eliminar" ){
-                navigation("/proyectos/borrarProyecto")
+                navigation(`/proyectos/borrarProyecto/${id}`)
             }
 
             if(type == "editar"){
-                navigation("/proyectos/editarProyecto")
+                navigation(`/proyectos/editarProyecto/${id}`)
             }
         }
     }
@@ -48,32 +49,31 @@ function Button({type,texto, clase}){
 
 
 
-function InfoTable({clase,data}){
+function InfoTable({clase,data, headers}){
 
-    let foo = (index,array) => {
-        if(index == array.length - 1){
-            return(
-                <>
-                <Button type="editar" texto="Editar" clase = {clase}/>
-                <Button type="eliminar" texto="Eliminar" clase = {clase}/>
-                {clase == 'estudiante'?
-                    <Button type="agregarExcelBoton" texto="Agregar a excel"/>
-                : null}
-                </>
-            )
-        } else {
-            return (
-                <p>Hola</p>
-            )
+
+    let returnCheckmark = (element) => {
+        if (typeof element === "boolean"){
+            if (element){
+                return '✅'
+            } else{
+                return '❌'
+            }
+        } else{
+            return element
         }
     }
+
+    useEffect(() =>{
+     console.log(data)   
+    })
 
     return (
         <table className={["infoTable",clase].join(" ")}>
             <thead>
                 <tr>
                     {
-                        data.map((row,index)=>{
+                        headers.map((row,index)=>{
                             return(
                                 <td id={index}>
                                     {row}
@@ -87,17 +87,29 @@ function InfoTable({clase,data}){
             <tbody>
                 {
                     data.map((row,index)=>{
+                        let values = Object.values(row)
                         return(
-                            <tr>
+                            <tr key={index}>
                                 {
-                                    data.map((row,index) => {
+                                    values.map((Element, i) => {
                                         return(
-                                            <td id={index}>
-                                                {foo(index,data)}
+                                            <td key={i}>
+                                                {returnCheckmark(Element)}
                                             </td>
                                         )
                                     })
                                 }
+
+                                <td>
+                                
+                                <div>
+                                <Button type="editar" texto="Editar" clase = {clase} id={clase == 'estudiante'? row.cedula : row.idProyecto}/>
+                                <Button type="eliminar" texto="Eliminar" clase = {clase} id={clase == 'estudiante'? row.cedula : row.idProyecto}/>
+                                </div>
+                                {clase == 'estudiante'?
+                                 <Button type="agregarExcelBoton" texto="Agregar a excel" id={row.cedula}/>
+                                 : null}
+                                </td>
                             </tr>
                         )
                     })

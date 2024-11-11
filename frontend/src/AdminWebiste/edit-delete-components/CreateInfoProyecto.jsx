@@ -2,8 +2,10 @@ import React from "react";
 import "../edit-delete-components/formObject.css"
 import Header from "../AdminWebsiteComponents/Header";
 import Footer from "../../Footer";
-import { Link } from "react-router-dom";
-function CreateInfoProyecto({data}){
+import { Link, useParams, useNavigate } from "react-router-dom";
+import axios from "axios";
+function CreateInfoProyecto(){
+
     return(
         <div className="wrapperAdmin">
         <Header />

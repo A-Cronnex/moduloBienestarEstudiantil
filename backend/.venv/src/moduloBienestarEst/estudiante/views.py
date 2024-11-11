@@ -1,6 +1,12 @@
 from django.shortcuts import render,redirect
 from .forms import EstudianteForm
 from proyectoBienestar.models import Proyecto
+from .models import Estudiante
+from rest_framework import status
+from rest_framework.response import Response
+from rest_framework.decorators import api_view
+from .api.serializers import EstudianteSerializer
+
 # Create your views here.
 def formViewStudent(request, *args, **kwargs):
     nombreProyecto = Proyecto.objects.values_list('nombreProyecto',flat=True)
@@ -16,3 +22,26 @@ def formViewStudent(request, *args, **kwargs):
         form = EstudianteForm()
     print(request.POST)
     return render(request,"form.html",{'form':form, **context})
+
+@api_view(['GET','PUT','DELETE'])
+def estudiante_detalle(request, id):
+    try:
+        estudiante = Estudiante.objects.get(pk=id)
+    except Estudiante.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method == 'GET':
+        serializer = EstudianteSerializer(estudiante)
+        return Response(serializer.data)
+
+    elif request.method == 'PUT':
+        serializer = EstudianteSerializer(estudiante, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        estudiante.delete()
+        
+

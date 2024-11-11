@@ -1,85 +1,179 @@
-import React from "react"
+import React, { useState } from "react"
 import Header from "../AdminWebsiteComponents/Header"
 import Footer from "../../Footer"
-import { Link } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 import "../edit-delete-components/formObject.css"
+import axios from "axios"
+import { useEffect } from "react"
+import carreras from "../../utils/carreras.json"
+import facultades from "../../utils/faculties.json"
+import tipoSangre from "../../utils/sangre.json"
 
-function DeleteInfoEstudiante({data}){
+function DeleteInfoEstudiante(){
+    const {id} = useParams();
+    const navigate = useNavigate()
+    const [data, setData] = useState({
+        nombreCompleto: "",
+        edad: "",
+        cedula: "",
+        telefonoUno: "",
+        telefonoDos: "",
+        correoInstitucional: "",
+        yearCursado: "",
+        proyectoQueParticipa: "",
+        nombreFacultad: "",
+        tipoSangre: "",
+        nombreCarrera: ""
+    })
+    const [proyectData ,setProyectData] = useState([])
+    const nombreFacultades = facultades.facultades
+    const url = `${import.meta.env.VITE_API_URL}estudiante/${id}/`
+    const urlProyecto = `${import.meta.env.VITE_API_URL}proyecto`
+    const sangreTipo = tipoSangre.tipoSangre
+    const carrera = carreras.carreras
+    const [loading, setLoading] = useState(true)
+
+    useEffect(() => {
+        if(id){
+            fetchData()
+            fetchDataP()
+        }
+        console.log(data)
+        console.log(data.nombreCarrera)
+        console.log(data.nombreFacultad)
+        console.log(carrera)
+    },[id])
+
+    const fetchData = async() => {
+
+        try {
+        const response = await axios.get(url)
+        const {data} = response
+        setData(data)
+        setLoading(false)
+        } catch(error) {
+            setLoading(false)
+        }
+    }
+
+    const fetchDataP = async() => {
+        const responseP = await axios.get(urlProyecto)
+        const {data} = responseP
+        setProyectData(data)
+
+    }
+
+
+
+    const handleChange = (event) => {
+        setData({
+            ...data,
+            [event.target.name]: event.target.value
+        })
+    }
+
+    const handleDelete = async() => {
+        try{
+            const response = axios.delete(url)
+            alert("Estudiante borrado con exito")
+            navigate("/")
+        } catch(error) {
+            console.log(error)
+        }
+    }
+
+    if(loading){
+        return <div>Loading</div>
+    }
+
     return(
         <div className="wrapperAdmin">
             <Header />
             <div className="wrapper">
-                <div class='form-container'>
-                  <h1 class='title'>Borrar estudiante</h1>
-                  <form action="" class='form-info' method="GET">
+                <div className='form-container'>
+                  <h1 className='title'>Eliminar estudiante </h1>
+                  <form action="" className='form-info' method="GET" onSubmit={handleDelete}>
                     
-                    <label for="nombre">Nombre completo: </label>
-                    <input type="text" name='nombreCompleto' id='nombre' class='inputForForms' />
-                    
-      
-                    
-                    <label for="edad">Edad: </label>
-                    <input type="number" name='edad' id='edad' class='inputForForms'/>
+                    <label htmlFor="nombre">Nombre completo: </label>
+                    <input type="text" name='nombreCompleto' id='nombre' className='inputForForms' value={data.nombreCompleto} onChange={handleChange}/>
                     
       
-                      
-                      <label for="cedula">Cedula: </label>
-                      <input type="text" name='cedula' id='cedula' class='inputForForms'/>
+                    
+                    <label htmlFor="edad">Edad: </label>
+                    <input type="number" name='edad' id='edad' value={data.edad} onChange={handleChange} className='inputForForms'/>
                     
       
                       
-                      <label for="Telefono1">Telefono 1: </label>
-                      <input type="text" name='telefonoUno' id='Telefono1' class='inputForForms'/>
+                      <label htmlFor="cedula">Cedula: </label>
+                      <input type="text" name='cedula' value={data.cedula} onChange={handleChange} id='cedula' className='inputForForms'/>
+                    
+      
+                      
+                      <label htmlFor="Telefono1">Telefono 1: </label>
+                      <input type="text" name='telefonoUno' value={data.telefonoUno} onChange={handleChange} id='Telefono1' className='inputForForms'/>
                       
       
       
                       
-                      <label for="Telefono2">Telefono 2: </label>
-                      <input type="text" name='telefonoDos' id='Telefono2' class='inputForForms'/>
+                      <label htmlFor="Telefono2">Telefono 2: </label>
+                      <input type="text" name='telefonoDos' value={data.telefonoDos} onChange={handleChange} id='Telefono2' className='inputForForms'/>
                       
       
                       
-                      <label for="correoInstitucional">Correo institucional: </label>
-                      <input type="email" name='correoInstitucional' id='correoInstitucional' class='inputForForms'/>
+                      <label htmlFor="correoInstitucional">Correo institucional: </label>
+                      <input type="email" name='correoInstitucional' value={data.correoInstitucional} onChange={handleChange} id='correoInstitucional' className='inputForForms'/>
                       
       
                     
-                     <label for="yearCursado">Año actual que cursa: </label>
-                     <input type="number" name='yearCursado' id='yearCursado' class='inputForForms'/>
+                     <label htmlFor="yearCursado">Año actual que cursa: </label>
+                     <input type="number" name='yearCursado' value={data.yearCursado} onChange={handleChange} id='yearCursado' className='inputForForms'/>
       
-                     <label for='proyectoQueParticipa'>Proyecto que va a participar: </label>
-                     <select name="proyectoQueParticipa" id="proyectos">
+                     <label htmlFor='proyectoQueParticipa'>Proyecto que va a participar: </label>
+                     <select name="proyectoQueParticipa" id="proyectos" value={data.proyectoQueParticipa} onChange={handleChange}>
+                        {proyectData.map((proyecto, index) => {
+                            return(<option key={index} value={proyecto.nombreProyecto}> {proyecto.nombreProyecto}</option>)
+                        })}
                      </select>
                     
-                     <label for="nombreFacultad">Facultad: </label>
-                     <select name="nombreFacultad" id="facultades">
+                     <label htmlFor="nombreFacultad">Facultad: </label>
+                     <select name="nombreFacultad" id="facultades" value={data.nombreFacultad} onChange={handleChange}>
+                     {nombreFacultades.map((facultad, index) => {
+                            return(<option key={index} value={facultad.nombre}> {facultad.nombre} </option>)
+                        })}
                      </select>
                       
-      
-      
-            
-                    <label for="tipoSangre">Tipo de Sangre: </label>
-                    <select name='tipoSangre' id='tipoSangre'>
+                      
+                    <label htmlFor="tipoSangre">Tipo de Sangre: </label>
+                    <select name='tipoSangre' id='tipoSangre' value={data.tipoSangre} onChange={handleChange}>
+                        {sangreTipo.map((sangre, index) => {
+                            return(<option key={index} value={sangre}>{sangre}</option>)
+                        })}
                     </select>
              
       
-                    <label for="nombreCarrera">Carreras: </label>
-                    <select name="nombreCarrera" id="carreras">
+                    <label htmlFor="nombreCarrera">Carreras: </label>
+                    <select name="nombreCarrera" id="carreras" value={data.nombreCarrera} onChange={handleChange}>
+                        {
+                           
+                          
+                            carrera[data.nombreFacultad].map((carrera,index) => {
+                                return(<option key={index} value={carrera}>{carrera}</option>)
+                            })
+                        }
                      </select>
               
-                <div>
+                 <div>
                     <p>¿Incluye su copia de recibo de pago?</p>
-                    <input type="checkbox" name="booleanoReciboPago" className="inputForForms" value="true"/>
-                </div>
+                    <input type="checkbox" name="booleanoReciboPago" className="inputForForms" checked={data.booleanoReciboPago} onChange={(event) => setData({...data, booleanoReciboPago: data.booleanoReciboPago ? false : true})}/>
+                 </div>
 
-                <div>
-                <button type='submit'>Borrar Estudiante</button>
+                 <div>
+                 <button type='submit' className="eliminarBoton">Eliminar</button>
                 <Link to="/">
-                <button className="back">Regresar</button>
+                    <button className="back">Regresar</button>
                 </Link>
-                </div>
+                 </div>
                     </form>
-            
                 </div>
             </div>
                 <Footer></Footer>

@@ -1,17 +1,38 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Header from "../AdminWebsiteComponents/Header"
 import Footer from "../../Footer"
-import { Link } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 import "../edit-delete-components/formObject.css"
+import axios from "axios"
 
-function EditInfoProyecto({data}){
+
+function EditInfoProyecto(){
+    const {id} = useParams()
+    const navigate = useNavigate()
+    const [proyectData, setProyectData] = useState({})
+    const urlProyecto = `${import.meta.env.VITE_API_URL}proyecto/${id}/`
+
+    useEffect(() => {
+        fetchProyectData()
+    },[])
+
+    const fetchProyectData = async()=> {
+        try {
+        let response = axios.get(urlProyecto)
+        const {data} = response
+        setProyectData(data) 
+        }catch(error){
+            console.log("Error al traer los datos")
+        } 
+    }
+
     return(
         <div className="wrapperAdmin">
             <Header />
             <div className="wrapper">
                 <div class='form-container'>
                   <h1 class='title'>Editar proyecto</h1>
-                  <form action="" className='form-info' method="POST">
+                  <form action="" className='form-info' method="PUT">
                     <label htmlFor="idProyecto">ID Proyecto</label>
                     <input type="text" name="idProyecto" id="idProyecto" value=""/>
                     <label htmlFor="nombreProyecto">Nombre del Proyecto</label>

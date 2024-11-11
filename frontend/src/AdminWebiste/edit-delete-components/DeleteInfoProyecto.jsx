@@ -2,10 +2,13 @@ import React from "react"
 import Header from "../AdminWebsiteComponents/Header"
 import Footer from "../../Footer"
 import "../edit-delete-components/formObject.css"
-import { Link } from "react-router-dom"
+import { Link, useParams, useNavigate } from "react-router-dom"
 import "../edit-delete-components/formObject.css"
+import axios from "axios"
 
-function DeleteInfoProyecto({data}){
+function DeleteInfoProyecto(){
+    const {id} = useParams()
+    const navigate = useNavigate()
     return(
         <div className="wrapperAdmin">
             <Header />

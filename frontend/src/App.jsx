@@ -12,10 +12,10 @@ function App() {
         <Routes>
             <Route path='/' element={<EstudianteLink/>}></Route>
             <Route path='/proyectos' element={<ProyectoLink/>}></Route>
-            <Route path='/editarEstudiante' element={<EditInfoEstudiante/>}></Route>
-            <Route path='/borrarEstudiante' element={<DeleteInfoEstudiante/>}></Route>
-            <Route path='/proyectos/borrarProyecto' element={<DeleteInfoProyecto/>}></Route>
-            <Route path='/proyectos/editarProyecto' element={<EditInfoProyecto/>}></Route>
+            <Route path='/editarEstudiante/:id' element={<EditInfoEstudiante/>}></Route>
+            <Route path='/borrarEstudiante/:id' element={<DeleteInfoEstudiante/>}></Route>
+            <Route path='/proyectos/borrarProyecto/:id' element={<DeleteInfoProyecto/>}></Route>
+            <Route path='/proyectos/editarProyecto/:id' element={<EditInfoProyecto/>}></Route>
             <Route path='/proyectos/crearProyecto' element={<CreateInfoProyecto/>}></Route>
         </Routes>
         </BrowserRouter>

@@ -11,6 +11,7 @@
     gap: 1rem;
 }
 
+
 button[type="submit"]{
     background-color:  violet;
 }
@@ -18,6 +19,8 @@ button[type="submit"]{
 button[type="submit"]:hover{
     background-color:  rgb(185, 63, 185);
 }
+
+
 
 .form-info div {
     display: flex;
