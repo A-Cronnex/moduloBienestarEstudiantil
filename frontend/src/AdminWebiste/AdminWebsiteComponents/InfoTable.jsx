@@ -5,7 +5,7 @@ import React, { useEffect } from "react"
 import { useState } from "react"
 import { useNavigate } from "react-router-dom"
 
-function Button({type,texto, clase, id}){
+function Button({type,texto, clase, id, funcAppendArray, funcRemoveFromArray, element}){
     let [seleccionado, setSeleccionado] = useState(false)
     const navigation = useNavigate()
     let [idEP, setIdEP] = useState(id)
@@ -40,8 +40,24 @@ function Button({type,texto, clase, id}){
         }
         return texto
     }
+
+    let fooOnClick = (value) => {
+        if(type == "agregarExcelBoton"){
+
+            if (value != undefined){
+                if (seleccionado){
+                    funcRemoveFromArray(value)
+                    console.log("Elemento: " + value)
+                } else {
+                    funcAppendArray(value)
+                    
+                }
+            }
+        }
+    }
+
     return(
-        <button className={`${seleccionado && type == "agregarExcelBoton"? [type,"seleccionado"].join(" ") : type}`} onClick={()=> {setSeleccionado(!seleccionado); onClickNavigation()}}>
+        <button className={`${seleccionado && type == "agregarExcelBoton"? [type,"seleccionado"].join(" ") : type}`} onClick={()=> {setSeleccionado(!seleccionado); onClickNavigation() ; fooOnClick(element)}}>
             {foo()}
         </button>
     )
@@ -49,7 +65,7 @@ function Button({type,texto, clase, id}){
 
 
 
-function InfoTable({clase,data, headers}){
+function InfoTable({clase,data, headers, functionAppendArray, functionRemoveFromArray}){
 
 
     let returnCheckmark = (element) => {
@@ -63,10 +79,6 @@ function InfoTable({clase,data, headers}){
             return element
         }
     }
-
-    useEffect(() =>{
-     console.log(data)   
-    })
 
     return (
         <table className={["infoTable",clase].join(" ")}>
@@ -88,6 +100,9 @@ function InfoTable({clase,data, headers}){
                 {
                     data.map((row,index)=>{
                         let values = Object.values(row)
+                        let keys = Object.keys(row)
+                        let diccionario = Object.fromEntries(keys.map((key, index) => [key, values[index]]))
+                        
                         return(
                             <tr key={index}>
                                 {
@@ -107,7 +122,7 @@ function InfoTable({clase,data, headers}){
                                 <Button type="eliminar" texto="Eliminar" clase = {clase} id={clase == 'estudiante'? row.cedula : row.idProyecto}/>
                                 </div>
                                 {clase == 'estudiante'?
-                                 <Button type="agregarExcelBoton" texto="Agregar a excel" id={row.cedula}/>
+                                 <Button type="agregarExcelBoton" texto="Agregar a excel" id={row.cedula} element={JSON.stringify(row,null,2)} funcAppendArray={functionAppendArray} funcRemoveFromArray={functionRemoveFromArray} />
                                  : null}
                                 </td>
                             </tr>

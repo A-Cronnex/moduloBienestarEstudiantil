@@ -40,9 +40,9 @@ INSTALLED_APPS = [
     'fontawesomefree',
     'rest_framework',
     'corsheaders',
+    'rest_framework_simplejwt',
     'proyectoBienestar',
-    'estudiante',
-    'usuario'
+    'estudiante'
 
 ]
 
@@ -51,6 +51,17 @@ INSTALLED_APPS = [
 CORS_ALLOWED_ORIGINS = ['http://localhost:5173']
 
 CORS_ALLOW_ALL_ORIGINS = True
+
+CORS_ALLOW_CREDENTIALS = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'moduloBienestarEst.authentication.CookiesJWTAuthentication',
+    ),
+     'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.IsAuthenticated',
+    ]
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,6 +75,9 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'moduloBienestarEst.urls'
+
+SESSION_COOKIE_SAMESITE = 'None'  # For cross-origin
+SESSION_COOKIE_SECURE = True     # Only if using HTTPS
 
 TEMPLATES = [
     {

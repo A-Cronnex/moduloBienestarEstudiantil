@@ -2,7 +2,8 @@ from django.shortcuts import render
 from .models import Proyecto
 from estudiante.views import formViewStudent
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework import status
 from .api.serializers import ProyectoSerializer
 
@@ -24,6 +25,7 @@ def vistaCombinada(request, *args, **kwargs):
 
 
 @api_view(['GET','PUT','DELETE','POST'])
+@permission_classes([IsAuthenticated])
 def proyecto_detalle(request, id=None):
     try:
         proyecto = Proyecto.objects.get(pk=id)

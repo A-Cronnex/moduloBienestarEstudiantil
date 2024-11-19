@@ -4,8 +4,13 @@ from proyectoBienestar.models import Proyecto
 from .models import Estudiante
 from rest_framework import status
 from rest_framework.response import Response
-from rest_framework.decorators import api_view
 from .api.serializers import EstudianteSerializer
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+
+
+
+
 
 # Create your views here.
 def formViewStudent(request, *args, **kwargs):
@@ -24,6 +29,7 @@ def formViewStudent(request, *args, **kwargs):
     return render(request,"form.html",{'form':form, **context})
 
 @api_view(['GET','PUT','DELETE'])
+@permission_classes([IsAuthenticated])
 def estudiante_detalle(request, id):
     try:
         estudiante = Estudiante.objects.get(pk=id)

@@ -20,10 +20,16 @@ from estudiante.views import formViewStudent
 from proyectoBienestar.views import proyectos_view
 from estudiante.views import estudiante_detalle
 from proyectoBienestar.views import proyecto_detalle
+from .views import *
+
 urlpatterns = [
     path('',formViewStudent, name = "form"),
     path('admin/', admin.site.urls),
     path('api/',include('moduloBienestarEst.api.urls')),
+    path('api/token/', CustomTokenObtainPairViewStudent.as_view(), name='token_obtain_pair'),
+    path('api/token/refresh/', CustomRefreshTokenView.as_view(), name='token_refresh'),
+    path('api/logout/',logout),
+    path('api/authenticated/',is_authenticated),
     path('estudiante/<int:id>',estudiante_detalle, name="estudiante"),
     path('proyecto/<int:id>',proyecto_detalle,name="proyecto")
 ]

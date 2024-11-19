@@ -46,7 +46,7 @@ function EditInfoEstudiante(){
     const fetchData = async() => {
 
         try {
-        const response = await axios.get(url)
+        const response = await axios.get(url, {withCredentials: true})
         const {data} = response
         setData(data)
         setLoading(false)
@@ -56,7 +56,7 @@ function EditInfoEstudiante(){
     }
 
     const fetchDataP = async() => {
-        const responseP = await axios.get(urlProyecto)
+        const responseP = await axios.get(urlProyecto, {withCredentials: true})
         const {data} = responseP
         setProyectData(data)
 
@@ -74,7 +74,7 @@ function EditInfoEstudiante(){
     const handleUpdate = async () => {
 
         try{
-            const response = axios.put(url,data)
+            const response = axios.put(url,data, {withCredentials: true})
             alert("Estudiante actualizado con exito")
             navigate("/")
 

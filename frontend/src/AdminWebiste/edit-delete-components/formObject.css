@@ -38,3 +38,11 @@ button[type="submit"]:hover{
 .form-info input{
     height: 2rem;
 }
+
+input{
+    border: 1px solid black;
+}
+
+select {
+    border: 1px solid black;
+}

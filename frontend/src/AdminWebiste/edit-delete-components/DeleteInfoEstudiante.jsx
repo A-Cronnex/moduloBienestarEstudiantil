@@ -47,7 +47,7 @@ function DeleteInfoEstudiante(){
     const fetchData = async() => {
 
         try {
-        const response = await axios.get(url)
+        const response = await axios.get(url, {withCredentials: true})
         const {data} = response
         setData(data)
         setLoading(false)
@@ -57,7 +57,7 @@ function DeleteInfoEstudiante(){
     }
 
     const fetchDataP = async() => {
-        const responseP = await axios.get(urlProyecto)
+        const responseP = await axios.get(urlProyecto, {withCredentials: true})
         const {data} = responseP
         setProyectData(data)
 
@@ -74,7 +74,7 @@ function DeleteInfoEstudiante(){
 
     const handleDelete = async() => {
         try{
-            const response = axios.delete(url)
+            const response = axios.delete(url, {withCredentials: true})
             alert("Estudiante borrado con exito")
             navigate("/")
         } catch(error) {
@@ -92,7 +92,7 @@ function DeleteInfoEstudiante(){
             <div className="wrapper">
                 <div className='form-container'>
                   <h1 className='title'>Eliminar estudiante </h1>
-                  <form action="" className='form-info' method="GET" onSubmit={handleDelete}>
+                  <form action="" className='form-info' method="DELETE" onSubmit={handleDelete}>
                     
                     <label htmlFor="nombre">Nombre completo: </label>
                     <input type="text" name='nombreCompleto' id='nombre' className='inputForForms' value={data.nombreCompleto} onChange={handleChange}/>
