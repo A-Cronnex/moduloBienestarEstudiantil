@@ -1,9 +1,9 @@
-import { FormControl, FormLabel, VStack, Input, Button } from "@chakra-ui/react";
+import { FormControl, FormLabel, VStack, Input, Button, Heading, Center } from "@chakra-ui/react";
 import { useState } from "react";
-
-import { login } from "./api";
 import { useAuth } from "./useAuth";
-
+import Nav from "./nav";
+import Footer from "./Footer";
+import '../src/login.css'
 function Login(){
     let [username, setUsername] = useState('')
     let [password, setPassword] = useState('')
@@ -14,17 +14,26 @@ function Login(){
     }
     
     return (
-        <VStack>
-            <FormControl>
+        <>
+        <div className="wrapper">
+            <Nav></Nav>
+        <div className="wrapperStack">
+        <VStack spacing={"10px"} alignContent={"center"} alignItems={"center"} justifyContent={"center"} borderTop={"1px"} padding={"10rem"} width={"50%"} alignSelf={"center"} justifySelf={"center"} borderRadius={"100px"} backgroundColor={"white"}>
+            <Heading>Bienvenido, inicie sesión</Heading>
+            <FormControl margin={"5px"}>
                 <FormLabel>Usuario</FormLabel>
-                <Input onChange={(event) => setUsername(event.target.value)} value={username} type="text"></Input>
+                <Input border={"1px"} onChange={(event) => setUsername(event.target.value)} value={username} type="text" width={'50%'}></Input>
             </FormControl>
             <FormControl>
                 <FormLabel>Contraseña</FormLabel>
-                <Input onChange={(event) => setPassword(event.target.value)} value={password} type="password"></Input>
+                <Input border={"1px"} onChange={(event) => setPassword(event.target.value)} value={password} type="password" width={'50%'}></Input>
             </FormControl>
-            <Button onClick={handleLogin}>Iniciar sesión</Button>
+            <Button onClick={handleLogin} width={'30%'} backgroundColor={"green.700"} color={"white"}>Iniciar sesión</Button>
         </VStack>
+        </div>
+        <Footer></Footer>
+        </div>
+        </>
     )
 } 
 

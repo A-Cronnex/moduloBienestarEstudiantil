@@ -141,7 +141,9 @@ function EstudianteLink(){
                         <h1>Exportar Excel</h1>
                     </button>
                 </div>
+                <div className="wrapTable">
                 <InfoTable functionAppendArray = {functionCallInside} functionRemoveFromArray={removeAtIndex} headers={headerEst.row} clase="estudiante" data={ opcion == "Buscar estudiante por..." || opcion=="" ? dataEst : searchData} />
+                </div>
             </div>
             <Footer></Footer>
         </div>
@@ -203,7 +205,9 @@ function ProyectoLink(){
                     </button>
                     </Link>
                 </div>
+                <div className="wrapTable">
                 <InfoTable headers={headerProy.rows} clase="proyecto" data={opcionProyecto == "Buscar proyecto por..." || opcionProyecto == "" ? dataProyecto : searchData}/>
+                </div>           
             </div>
             <Footer></Footer>
         </div>

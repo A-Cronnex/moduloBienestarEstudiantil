@@ -1,0 +1,15 @@
+
+
+
+.wrapper{
+    height: 100%;
+}
+
+.wrapperStack{
+    padding: 5rem;
+    height: 100%;
+    background-image: url("/assets/fachada_utp_2.jpg");
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+

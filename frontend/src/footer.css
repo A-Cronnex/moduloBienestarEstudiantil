@@ -2,7 +2,7 @@ footer{
     background-color: rgb(117, 12, 146);
     display: flex;
     justify-content: center;
-    margin-top: 5rem;
+    
     padding: 1rem;
     border-top: 2px solid #FFF;
 }
